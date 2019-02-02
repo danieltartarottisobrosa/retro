@@ -1,25 +1,23 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './List.css'
 import { Item } from '../item/Item'
 
-class List extends Component {
-    constructor(props) {
-        super(props)
+function List(props) {
+    const onNew = props.onNew || (() => {})
+
+    function handleClick() {
+        onNew()
     }
 
-    render() {
-        return <section className="list">
-            <h4>{this.props.title}</h4>
-            <ul>
-                {this.props.items.map(item => (
-                    <Item text={item.text} />
-                ))}
-                <li>
-                    <button>Novo item</button>
-                </li>
-            </ul>
-        </section>
-    }
+    return <section className="list">
+        <h4>{props.title}</h4>
+        <ul>
+            {props.children}
+            <li>
+                <button onClick={handleClick}>Novo item</button>
+            </li>
+        </ul>
+    </section>
 }
 
 export { List }
